@@ -1,2 +1,5 @@
+
 # golored
-Color your shell scripts' output
+
+Color your shell scripts' output.
+
