@@ -9,11 +9,9 @@ import (
 )
 
 var (
-	flagBackgroundColor = flag.String("b", "", "background color")
-	flagForegroundColor = flag.String("f", "", "foreground color")
-	flagFormatting      = flag.String("F", "", "formatting option")
-	flagPrintInfo       = flag.Bool("i", false, "print color codes info and exit")
-	flagReadFile        = flag.String("s", "", "read from file")
+	flagPrintHelp = flag.Bool("help", false, "print extended usage info")
+	flagPrintInfo = flag.Bool("i", false, "print color codes info and exit")
+	flagReadFile  = flag.String("s", "", "read from file")
 
 	colorNames      = []string{"black", "red", "green", "yellow", "blue", "magenta", "cyan", "white"}
 	formattingNames = []string{"reset", "bold", "dim", "italic", "underline"}
@@ -54,6 +52,29 @@ func PrintInfo() {
 	}
 }
 
+func PrintHelp() {
+	fmt.Println(`golored: color any command's output
+
+Usage: golored [-i] [-help] [-s filename] options...
+  -i         print color codes info and exit
+  -help      print this help
+  -s         read from file (by default stdin is read)
+
+Options define how the text is formated:
+  f:color    set foreground color
+  b:color    set background color
+  bold       bold text
+  underline  underlined text
+  dim        dimmed text (not supported by all terminals)
+  italic     italic text (not supported by all terminals)
+
+Any number of options can passed. bold, dim and italic are combined, in case
+of multiple colors the last value overrides the previous ones.
+
+List of colors:
+  black, red, green, yellow, blue, magenta, cyan, white `)
+}
+
 func GetColorCode(color string) int {
 	for i, c := range colorNames {
 		if color == c {
@@ -80,14 +101,21 @@ func main() {
 		return
 	}
 
-	if *flagForegroundColor != "" {
-		fmt.Printf("\033[3%dm", GetColorCode(*flagForegroundColor))
+	if *flagPrintHelp {
+		PrintHelp()
+		return
 	}
-	if *flagBackgroundColor != "" {
-		fmt.Printf("\033[4%dm", GetColorCode(*flagBackgroundColor))
-	}
-	if *flagFormatting != "" {
-		fmt.Printf("\033[%dm", GetFormattingCode(*flagFormatting))
+
+	for _, o := range flag.Args() {
+		if o[:2] == "f:" {
+			fmt.Printf("\033[3%dm", GetColorCode(o[2:]))
+			continue
+		}
+		if o[:2] == "b:" {
+			fmt.Printf("\033[4%dm", GetColorCode(o[2:]))
+			continue
+		}
+		fmt.Printf("\033[%dm", GetFormattingCode(o))
 	}
 
 	if *flagReadFile == "" {

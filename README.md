@@ -26,25 +26,22 @@ go install # installs the binary to your $GOPATH
 
 ## Usage
 
-| argument         | function                  |
-|------------------|---------------------------|
-| `-F FORMATTING`  | specify formatting option |
-| `-b COLOR`       | specify background color  |
-| `-f COLOR`       | specify foreground color  |
-| `-h`             | print help                |
-| `-i`             | print color codes         |
-| `-s SOURCE_FILE` | read from file            |
+| argument         | function          |
+|------------------|-------------------|
+| `-help`          | print help        |
+| `-i`             | print color codes |
+| `-s SOURCE_FILE` | read from file    |
 
 ### Examples:
 
 ```sh
-golored -f red -F underline -s file.txt
+golored -s file.txt f:red underline
 ```
 
 Outputs the content of `file.txt` underlined and with red foreground.
 
 ```
-ls | golored -b blue
+ls | golored b:blue
 ```
 
 Colors the output of `ls` with blue background.
