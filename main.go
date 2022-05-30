@@ -5,18 +5,21 @@ import (
 	"flag"
 	"fmt"
 	"os"
-	"strings"
+	"strconv"
 )
 
 var (
-	flagPrintHelp = flag.Bool("help", false, "print extended usage info")
-	flagPrintInfo = flag.Bool("i", false, "print color codes info and exit")
-	flagReadFile  = flag.String("s", "", "read from file")
+	flagPrintHelp    = flag.Bool("help", false, "print extended usage info")
+	flagPrintInfo    = flag.Bool("i", false, "print color codes info and exit")
+	flagPrintExtInfo = flag.Bool("ii", false, "print extended color codes info and exit")
+	flagReadFile     = flag.String("s", "", "read from file")
 
+	bgFgCodes       = map[rune]int{'f': 3, 'b': 4}
 	colorNames      = []string{"black", "red", "green", "yellow", "blue", "magenta", "cyan", "white"}
 	formattingNames = []string{"reset", "bold", "dim", "italic", "underline"}
 )
 
+// read and output contents of a file
 func Read(file *os.File) {
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
@@ -29,52 +32,7 @@ func Read(file *os.File) {
 	}
 }
 
-func PrintFormattedLine(f string, c int, arr []string) {
-	fmt.Printf("  \033[%sm%s%s%d\033[0m\n",
-		f,
-		arr[c],
-		strings.Repeat(" ", 10-len(arr[c])),
-		c)
-}
-
-func PrintInfo() {
-	fmt.Println("colors:")
-	for i := 0; i <= 7; i++ {
-		if i == 7 {
-			PrintFormattedLine(fmt.Sprintf("4%d;30", i), i, colorNames)
-			continue
-		}
-		PrintFormattedLine(fmt.Sprintf("4%d", i), i, colorNames)
-	}
-	fmt.Println("\nformatting:")
-	for i := 0; i <= 3; i++ {
-		PrintFormattedLine(fmt.Sprintf("%d", i), i, formattingNames)
-	}
-}
-
-func PrintHelp() {
-	fmt.Println(`golored: color any command's output
-
-Usage: golored [-i] [-help] [-s filename] options...
-  -i         print color codes info and exit
-  -help      print this help
-  -s         read from file (by default stdin is read)
-
-Options define how the text is formated:
-  f:color    set foreground color
-  b:color    set background color
-  bold       bold text
-  underline  underlined text
-  dim        dimmed text (not supported by all terminals)
-  italic     italic text (not supported by all terminals)
-
-Any number of options can passed. bold, dim and italic are combined, in case
-of multiple colors the last value overrides the previous ones.
-
-List of colors:
-  black, red, green, yellow, blue, magenta, cyan, white `)
-}
-
+// get ansi code for color name
 func GetColorCode(color string) int {
 	for i, c := range colorNames {
 		if color == c {
@@ -84,6 +42,7 @@ func GetColorCode(color string) int {
 	return 0
 }
 
+// get ansi code for formatting option
 func GetFormattingCode(option string) int {
 	for i, o := range formattingNames {
 		if option == o {
@@ -96,28 +55,36 @@ func GetFormattingCode(option string) int {
 func main() {
 	flag.Parse()
 
+	// help and info
 	if *flagPrintInfo {
 		PrintInfo()
 		return
 	}
-
+	if *flagPrintExtInfo {
+		PrintInfo()
+		PrintExtInfo()
+		return
+	}
 	if *flagPrintHelp {
 		PrintHelp()
 		return
 	}
 
+	// parse arguments and set color
 	for _, o := range flag.Args() {
-		if o[:2] == "f:" {
-			fmt.Printf("\033[3%dm", GetColorCode(o[2:]))
-			continue
-		}
-		if o[:2] == "b:" {
-			fmt.Printf("\033[4%dm", GetColorCode(o[2:]))
+		if o[:2] == "f:" || o[:2] == "b:" {
+			num, err := strconv.Atoi(o[2:])
+			if err == nil {
+				fmt.Printf("\033[%d8;5;%dm", bgFgCodes[rune(o[0])], num)
+				continue
+			}
+			fmt.Printf("\033[%d%dm", bgFgCodes[rune(o[0])], GetColorCode(o[2:]))
 			continue
 		}
 		fmt.Printf("\033[%dm", GetFormattingCode(o))
 	}
 
+	// read and write text
 	if *flagReadFile == "" {
 		Read(os.Stdin)
 	} else {
@@ -128,5 +95,6 @@ func main() {
 		Read(f)
 	}
 
+	// reset at the end
 	fmt.Print("\033[0m")
 }
