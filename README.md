@@ -26,11 +26,12 @@ go install # installs the binary to your $GOPATH
 
 ## Usage
 
-| argument         | function          |
-|------------------|-------------------|
-| `-help`          | print help        |
-| `-i`             | print color codes |
-| `-s SOURCE_FILE` | read from file    |
+| argument         | function                           |
+|------------------|------------------------------------|
+| `-help`          | print help                         |
+| `-i`             | print color codes                  |
+| `-ii`            | print extended color codes (8-bit) |
+| `-s SOURCE_FILE` | read from file                     |
 
 ### Examples:
 
@@ -49,6 +50,8 @@ Colors the output of `ls` with blue background.
 ### List of colors:
 
 `black`, `blue`, `red`, `magenta`, `green`, `cyan`, `yellow`, `white`
+
+`0`-`255` (8-bit)
 
 ### List of formatting options:
 
