@@ -78,7 +78,7 @@ func PrintExtInfo() {
 func PrintHelp() {
 	fmt.Println(`golored: color any command's output
 
-Usage: golored [-i] [-help] [-s filename] options...
+Usage: golored [-i] [-ii] [-help] [-s filename] options...
   -i         print color codes info and exit
   -ii        print extended color codes info (8-bit) and exit
   -help      print this help

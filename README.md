@@ -13,7 +13,7 @@ Simply color your shell scripts' output by piping it into this program.
 
 ### Pre-built binaries
 
-Simply download the binary from the [releases page](https://github.com/alexcoder04/golored/releases/latest).
+Download the binary from the [releases page](https://github.com/alexcoder04/golored/releases/latest).
 
 ### Build from source
 

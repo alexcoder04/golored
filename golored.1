@@ -1,0 +1,74 @@
+.TH "golored" "1"
+
+.SH "NAME"
+.PP
+golored - color your shell scripts' output
+
+.SH "SYNOPSIS"
+.PP
+golored [OPTION]... [FORMATTING]...
+
+.SH "DESCRIPTION"
+.PP
+golored reads text from stdin and colors/formats it according to the formatting options passed as command-line arguments
+
+.SS "-help"
+.PP
+print usage info and exit
+
+.SS "-i"
+.PP
+print color codes and exit
+
+.SS "-ii"
+.PP
+print extended color codes (8-bit colors) and exit
+
+.SS "-s FILE"
+.PP
+read from file instead of stdin
+
+.SH "LIST OF FORMATTING OPTIONS"
+
+.PP
+if multiple colors are passed, the last one overrides the previous ones; multiple formatting settings are combined
+
+.PP
+colors (can be prefixed with 'f:' for foreground or 'b:' for background):
+.EX
+    black
+    red
+    green
+    yellow
+    blue
+    magenta
+    cyan
+    white
+
+.PP
+8-bit colors: numbers from 0 to 255
+
+.PP
+formatting:
+.EX
+    bold
+    dim             not supported by all terminals
+    italic          not supported by all terminals
+    underline
+
+.SH "EXAMPLES"
+.SS "golored -s file.txt underline f:red"
+.PP
+outputs contents of file.txt underlined with red foreground
+.SS "ls | golored b:blue"
+.PP
+colors the output of ls with blue background
+
+.SH "AUTHOR"
+.PP
+alexcoder04 <alexcoder04@protonmail.com>
+
+.SH "REPORTING BUGS"
+.PP
+feel free to report any bugs to the issue tracker: <https://github.com/alexcoder04/golored/issues>
+
