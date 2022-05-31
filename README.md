@@ -11,6 +11,10 @@ Simply color your shell scripts' output by piping it into this program.
 
 ## Installation
 
+### Arch Linux
+
+Golored is available on the [AUR](https://aur.archlinux.org/packages/golored).
+
 ### Pre-built binaries
 
 Download the binary from the [releases page](https://github.com/alexcoder04/golored/releases/latest).
