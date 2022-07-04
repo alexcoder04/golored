@@ -2,6 +2,7 @@
 # golored
 
 [![Release](https://img.shields.io/github/v/release/alexcoder04/golored)](https://github.com/alexcoder04/golored/releases/latest)
+[![AUR](https://img.shields.io/aur/version/golored)](https://aur.archlinux.org/packages/golored)
 [![Top language](https://img.shields.io/github/languages/top/alexcoder04/golored)](https://github.com/alexcoder04/golored/search?l=go)
 [![License](https://img.shields.io/github/license/alexcoder04/golored)](https://github.com/alexcoder04/golored/blob/main/LICENSE)
 [![Issues](https://img.shields.io/github/issues/alexcoder04/golored)](https://github.com/alexcoder04/golored/issues)
