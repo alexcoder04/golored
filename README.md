@@ -10,6 +10,8 @@
 
 Simply color your shell scripts' output by piping it into this program.
 
+<img style="width: 100%;" alt="screenshot" src="screenshots/golored-screenshot-01.png">
+
 ## Installation
 
 ### Arch Linux
