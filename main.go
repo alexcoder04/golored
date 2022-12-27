@@ -9,6 +9,9 @@ import (
 )
 
 var (
+	VERSION    string = "unknown"
+	COMMIT_SHA string = "unknown"
+
 	flagPrintHelp    = flag.Bool("help", false, "print extended usage info")
 	flagPrintInfo    = flag.Bool("i", false, "print color codes info and exit")
 	flagPrintExtInfo = flag.Bool("ii", false, "print extended color codes info and exit")

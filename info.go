@@ -76,8 +76,8 @@ func PrintExtInfo() {
 }
 
 func PrintHelp() {
-	fmt.Println(`golored: color any command's output
-
+	fmt.Printf("golored %s (commit %s): color any command's output\n", VERSION, COMMIT_SHA)
+	fmt.Println(`
 Usage: golored [-i] [-ii] [-help] [-s filename] options...
   -i         print color codes info and exit
   -ii        print extended color codes info (8-bit) and exit
