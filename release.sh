@@ -108,7 +108,7 @@ release_arch(){
   #git push
 }
 
-case "$1" in
+case "$2" in
   default) release_default ;;
   arch) release_arch ;;
   *)

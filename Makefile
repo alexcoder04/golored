@@ -15,7 +15,7 @@ GOFLAGS = -ldflags "-X main.VERSION=$(VERSION) -X main.COMMIT_SHA=$(COMMIT)"
 # build
 
 build:
-	go build -v $(GOFLAGS) .
+	go build -v $(GOFLAGS) -o $(NAME) .
 
 # linux
 build-amd64:
