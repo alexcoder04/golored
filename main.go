@@ -57,6 +57,7 @@ func GetFormattingCode(option string) int {
 }
 
 func main() {
+	flag.Usage = PrintHelp
 	flag.Parse()
 
 	// version, help and info
