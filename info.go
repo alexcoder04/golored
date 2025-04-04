@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"strings"
 )
 
@@ -98,4 +99,13 @@ of multiple colors the last value overrides the previous ones.
 List of colors:
   black, red, green, yellow, blue, magenta, cyan, white
   0-255 (8-bit colors)`)
+}
+
+func PrintVersion() {
+	fmt.Printf("frei %s", VERSION)
+	if COMMIT_SHA != "" {
+		fmt.Printf(" (commit %s)", COMMIT_SHA)
+	}
+	fmt.Print("\n")
+	os.Exit(0)
 }

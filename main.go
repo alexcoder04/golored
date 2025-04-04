@@ -13,6 +13,7 @@ var (
 	COMMIT_SHA string = "unknown"
 
 	flagPrintHelp    = flag.Bool("help", false, "print extended usage info")
+	flagPrintVersion = flag.Bool("version", false, "print program version and exit")
 	flagPrintInfo    = flag.Bool("i", false, "print color codes info and exit")
 	flagPrintExtInfo = flag.Bool("ii", false, "print extended color codes info and exit")
 	flagReadFile     = flag.String("s", "", "read from file")
@@ -58,7 +59,11 @@ func GetFormattingCode(option string) int {
 func main() {
 	flag.Parse()
 
-	// help and info
+	// version, help and info
+	if *flagPrintVersion {
+		PrintVersion()
+		return
+	}
 	if *flagPrintInfo {
 		PrintInfo()
 		return

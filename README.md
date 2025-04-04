@@ -1,16 +1,9 @@
 
 # golored
 
-[![Release](https://img.shields.io/github/v/release/alexcoder04/golored)](https://github.com/alexcoder04/golored/releases/latest)
-[![AUR](https://img.shields.io/aur/version/golored)](https://aur.archlinux.org/packages/golored)
-[![Top language](https://img.shields.io/github/languages/top/alexcoder04/golored)](https://github.com/alexcoder04/golored/search?l=go)
-[![License](https://img.shields.io/github/license/alexcoder04/golored)](https://github.com/alexcoder04/golored/blob/main/LICENSE)
-[![Issues](https://img.shields.io/github/issues/alexcoder04/golored)](https://github.com/alexcoder04/golored/issues)
-[![Pull requests](https://img.shields.io/github/issues-pr/alexcoder04/golored)](https://github.com/alexcoder04/golored/pulls)
-
 Simply color your shell scripts' output by piping it into this program.
 
-If you are intereseted in a more lightweight but also less-features version written in Shell, see [alexcoder04/shclrz](https://github.com/alexcoder04/shclrz).
+If you are interested in a more lightweight but also less-features version written in Shell, see [alexcoder04/shclrz](https://github.com/alexcoder04/shclrz).
 
 <img style="width: 100%;" alt="screenshot" src="screenshots/golored-screenshot-01.png">
 
@@ -42,6 +35,7 @@ make install # to install the binary to your $GOPATH
 
 | argument         | function                           |
 |------------------|------------------------------------|
+| `-version`       | print program version and exit     |
 | `-help`          | print help                         |
 | `-i`             | print color codes                  |
 | `-ii`            | print extended color codes (8-bit) |

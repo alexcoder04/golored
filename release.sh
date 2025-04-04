@@ -84,16 +84,16 @@ release_arch(){
   fi
 
   # download the .tar.gz for the tag from github and calculate the ms5sum
-  echo "Calculating the md5sum..."
+  echo "Calculating the sha256sum..."
   cd "${TMPDIR:-/tmp}"
   wget -O "$TAG_NAME.tar.gz" "$REPO/archive/refs/tags/$TAG_NAME.tar.gz" || exit 1
-  MD5SUM="$(md5sum "$TAG_NAME.tar.gz" | cut -d " " -f1)"
+  SHA256SUM="$(sha256sum "$TAG_NAME.tar.gz" | cut -d " " -f1)"
   cd "$OLDPWD"
 
   # change package version and md5sum for the PKGBUILD
   echo "Updating PKGBUILD..."
   sed -i "s/^pkgver=.*\$/pkgver=$VERSION/" ".aur/PKGBUILD"
-  sed -i "s/^md5sums=('.*')\$/md5sums=('$MD5SUM')/" ".aur/PKGBUILD"
+  sed -i "s/^sha256sums=('.*')\$/sha256sums=('$SHA256SUM')/" ".aur/PKGBUILD"
 
   # generate .SRCINFO
   cd ".aur"
@@ -103,9 +103,9 @@ release_arch(){
   # push to AUR
   echo "Committing changes in the AUR package..."
   git add PKGBUILD .SRCINFO
-  #git commit -S -m "update to $TAG_NAME"
-  #echo "Pushing changes to the AUR..."
-  #git push
+  git commit -S -m "update to $TAG_NAME"
+  echo "Pushing changes to the AUR..."
+  git push
 }
 
 case "$2" in
